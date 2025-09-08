@@ -3,7 +3,19 @@ on:
   pull_request:
     types:
       - opened
+    branches:
+      - main #main FILTER TO TARGET only MAIN BRANCH
+      - 'dev-*' #dev-1, dev-feature, dev-fix
+      - 'feat-**' #feat-new, feat-awesome, feat-123 
   workflow_dispatch:
+  push:
+    branches:
+      - main #main
+      - 'dev-*' #dev-1, dev-feature, dev-fix
+      - 'feat-**' #feat-new, feat-awesome, feat-123
+    paths-ignore: # ignore changes to these paths - so that push to these paths do not trigger the workflow
+      - 'docs/**'
+      - '.github/**'
 jobs:
   deploy:
     runs-on: ubuntu-latest
